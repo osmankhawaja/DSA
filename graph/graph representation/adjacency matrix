@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//space complexity:O(n^2)
+
+void adj_matrix()
+{
+    int v,e;
+    cin>>v>>e;
+    int graph[v+5][v+5]={}; //matrix size vertex*vertex
+    for(int i=0; i<e; i++)
+    {
+        int x,y;
+        cin>>x>>y;
+        graph[x][y]=1;
+        graph[y][x]=1;
+    }
+    for(int i=0; i<v; i++)
+    {
+        for(int j=0; j<v; j++)
+        {
+            cout<<graph[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+int main()
+{
+    adj_matrix();
+    return 0;
+}
