@@ -1,3 +1,3 @@
 # DSA
 Graph
-author-osman
+author-osman(student)
