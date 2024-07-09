@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int M=1e9+7;
+const double eps=1e-8;
+const int N=1e3+10;
+
+vector<int>g[N];
+bool vis[N];
+
+bool dfs(int vertex, int parent)
+{
+  vis[vertex]=true;
+  bool is_loop_exist=false;
+  for(auto child:g[vertex])
+  {
+    if(vis[child] && child == parent) continue;
+    if(vis[child]) return true;
+    is_loop_exist |= dfs(child, vertex);
+  }
+  return is_loop_exist;
+}
+//input
+/*8 6
+1 2
+2 3
+2 4
+3 5
+5 4
+6 7*/
+//output
+//cycle exist
+
+void solve()
+{
+   int v,e;
+   cin>>v>>e;
+   int cnt=0;
+   bool cycle_found=false;
+   for(int i=0; i<e; i++)
+   {
+    int x,y;
+    cin>>x>>y;
+    g[x].push_back(y);
+    g[y].push_back(x);
+   }
+   for(int i=1; i<=v; i++)
+   {
+    if(vis[i]) continue;
+     cycle_found |= dfs(i, 0);
+   }
+   if(cycle_found)
+    cout<<"cycle exist";
+   else
+    cout<<"cycle not exist";
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    //test
+    solve();
+}
