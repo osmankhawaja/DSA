@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int M=1e9+7;
+const double eps=1e-8;
+const int N=1e3+10;
+vector<int>g[N];
+bool vis[N];
+vector<vector<int>>connec_components;
+vector<int>temp;
+/*input
+8 5
+1 2
+2 3
+2 4
+3 5
+6 7*/
+/*output
+connected components: 3
+1 2 3 5 4 
+6 7 
+8 */
+void dfs(int vertex)
+{
+  vis[vertex]=true;
+  temp.push_back(vertex);
+  for(auto child:g[vertex])
+  {
+    if(vis[child]) continue;
+    dfs(child);
+  }
+}
+void solve()
+{
+   int v,e;
+   cin>>v>>e;
+   int cnt=0;
+   for(int i=0; i<e; i++)
+   {
+    int x,y;
+    cin>>x>>y;
+    g[x].push_back(y);
+    g[y].push_back(x);
+   }
+   for(int i=1; i<=v; i++)
+   {
+    if(vis[i]) continue;
+    temp.clear();
+    dfs(i);
+    connec_components.push_back(temp);
+    cnt++;
+   }
+   cout<<"connected components: "<<cnt<<endl;
+   for(int i=0; i<connec_components.size(); i++)
+   {
+    for(int j=0; j<connec_components[i].size(); j++)
+    {
+      cout<<connec_components[i][j]<<" ";
+    }
+    cout<<endl;
+   }
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    //test
+    solve();
+}
