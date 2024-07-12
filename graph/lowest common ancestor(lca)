@@ -1,0 +1,60 @@
+//https://youtu.be/il2HXsJPGO4?si=0i5zmZ_64dN-3n3W
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N=1e3;
+vector<int>g[N];
+int parent[N];
+
+void dfs(int vertex, int par=-1)
+{
+    parent[vertex]=par;
+    for(auto child : g[vertex])
+    {
+        if(child == par) continue;
+        dfs(child, vertex);
+    }
+}
+
+vector<int>path(int vertex)
+{
+    vector<int>ans;
+    while(vertex != -1)
+    {
+        ans.push_back(vertex);
+        vertex=parent[vertex];
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+
+int main()
+{
+    int v;
+    cin>>v;
+    for(int i=0; i<v-1; i++)
+    {
+        int x,y;
+        cin>>x>>y;
+        g[x].push_back(y);
+        g[y].push_back(x);
+    }
+    
+    int x, y;
+    cin>>x>>y;
+    dfs(1);
+    vector<int>path_x=path(x);
+    vector<int>path_y=path(y);
+    int lca=-1;
+    for(int i=0; i<min(path_x.size(), path_y.size()); i++)
+    {
+        if(path_x[i] == path_y[i])
+        {
+            lca=path_x[i];
+        }
+        else
+         break;
+    }
+    cout<<lca;
+    return 0;
+}
