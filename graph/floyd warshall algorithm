@@ -1,0 +1,65 @@
+/*input directed graph
+6 9
+1 2 1
+1 3 5
+2 3 2
+2 4 2
+2 5 1
+3 5 2
+4 5 3
+4 6 1
+5 6 2*/
+#include<bits/stdc++.h>
+using namespace std;
+
+const int N=1e3+10;
+const int INF=1e9+10;
+int dis[N][N];
+
+//time complexity:O(n^3)
+
+int main()
+{
+    for(int i=0; i<N; i++)//initailize with infinity
+    {
+        for(int j=0; j<N; j++)
+        {
+            if(i == j) dis[i][j]=0;
+            else dis[i][j]=INF;
+        }
+    }
+    
+    int n, m;
+    cin>>n>>m;
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<m; j++)
+        {
+            int x,y,wt;
+            cin>>x>>y>>wt;
+            dis[x][y]=wt;
+        }
+    }
+    for(int k=1; k<=n; k++)
+    {
+        for(int i=1; i<=n; i++)
+        {
+            for(int j=1; j<=n; j++)
+            {
+                if(dis[i][j])
+                  dis[i][j]=min(dis[i][j], dis[i][k]+dis[k][j]);
+            }
+        }
+    }
+    for(int i=1; i<=n; i++)
+        {
+            for(int j=1; j<=n; j++)
+            {
+                if(dis[i][j] == INF)
+                 cout<<"I ";
+                else cout<<dis[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+        return 0;
+}
