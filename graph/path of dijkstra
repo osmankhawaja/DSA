@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int inf=1e9;
+const int N=1e3;
+int v,e;
+
+vector<pair<int, int>>g[N];
+vector<int>dis(N, inf);
+vector<int>parent(N);
+//input
+/* 5 6
+1 2 2
+2 5 5
+1 4 1
+4 3 3
+2 3 4
+3 5 1 */
+//output
+//1 4 3 5
+void dijkstra()
+{
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>q;
+    for(int i=1; i<=v; i++)
+     parent[i]=i;
+
+    q.push({0, 1});
+    dis[1]=0;
+
+    while(!q.empty())
+    {
+        auto v=q.top();
+        int cost=v.first;
+        int node=v.second;
+        q.pop();
+        for(auto child : g[node])
+        {
+            int vertex=child.first;
+            int wt=child.second;
+
+            if(dis[node] + wt < dis[vertex]){
+                dis[vertex]=cost + wt;
+                q.push({dis[vertex], vertex});
+                parent[vertex]=node;
+            }
+        }
+    }
+    vector<int>ans;
+    int node=v;
+    while(parent[node] != node)
+    {
+        ans.push_back(node);
+        node=parent[node];
+    }
+    ans.push_back(1);
+    reverse(ans.begin(), ans.end());
+
+    for(int i=0; i<ans.size(); i++)///1 to v shortest path
+    {
+        cout<<ans[i]<<" ";
+    }
+}
+
+int main()
+{
+    cin >>v >> e;
+    for(int i=0; i<e; i++)
+    {
+        int x, y, wt;
+        cin>>x >>y >>wt;
+        g[x].push_back({y, wt});
+    }
+    dijkstra();
+}
