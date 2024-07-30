@@ -2,6 +2,8 @@
 using namespace std;
 int const INF=1e16;
 
+//time complexity : O(E log(V)) edges and vertices
+
 void dijkstra(int n, vector<vector<pair<int, int>>> &graph)
 {
     vector<int>dis(n+5, INF);
