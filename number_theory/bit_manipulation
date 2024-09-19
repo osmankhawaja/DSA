@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   //left shift(<<)
+   1. (1<<5)//(2^5) multiply by 2
+
+   //right shift(>>)
+   2. (10>>1) //(10/2) divided by 2
+   
+   //check a number is a power of 2
+   3. x&(x-1)//return boolean
+   
+   //set the ith bit
+   4. x|(1<<i)
+   
+   //unset the ith bit
+   5. x&(~(1<<i))
+   
+   //toggle the ith bit
+   6. x^(1<<i)
+   
+   //unset the rightmost set bit
+   7. x&(x-1)
+   
+   //find rightmost set bit
+   8. x&(-x)//10100 -> given 100
+   
+   //uppercase to lowercase
+   9. ch |' ' // or with space
+   
+   //lowercase to uppercase
+   10. ch&'_' // and with underscore
+   
+   //set bit count
+   11. __builtin_popcount(x)
+   
+   //check count of set bit is odd or not
+   12. __builtin_parity(x)//if count of set bit is odd return true
+   
+   //count the trailing zeros
+   13. __builtin_ctz(x)
+   
+   //swapping two numbers a b
+   14. a=a^b; //a^b
+       b=a^b; //a^b ^b -> a
+       a=a^b; //a^b ^a -> b
+}
